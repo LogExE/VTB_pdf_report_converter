@@ -176,12 +176,12 @@ namespace ReportConverterLib.Converter
                     {
                         try
                         {
-                            DateTime dateTime = DateTime.ParseExact(table[r, 0].ToString().Replace("\r", " ").Replace('.', '-'),
-                               "dd-MM-yyyy HH:mm:ss",
+                            DateTime dateTime = DateTime.ParseExact(table[r, 0].ToString().Replace("\r", " "),
+                               "dd.MM.yyyy HH:mm:ss",
                                     System.Globalization.CultureInfo.InvariantCulture, 0);
                             DateOnly bankExecuteDate = DateOnly.ParseExact(table[r, 1].ToString(), "dd.mm.yyyy");
-                            double amount = double.Parse(table[r, 3].ToString().Replace('.', ','));
-                            double commission = double.Parse(table[r, 4].ToString().Replace(" RUB", "").Replace('.', ','));
+                            double amount = double.Parse(table[r, 3].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                            double commission = double.Parse(table[r, 4].ToString().Replace(" RUB", ""), System.Globalization.CultureInfo.InvariantCulture);
 
                             string memo = table[r, 5].ToString();
                             if (TryParsePayee(memo, out string payee))
